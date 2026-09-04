@@ -1,4 +1,4 @@
-import { parse } from 'commonform-commonmark'
+import commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -80,4 +80,13 @@ function element (name, text) {
   const e = document.createElement(name)
   e.textContent = text
   return e
+}
+
+function parse (element) {
+  const value = element.value
+  if (value.trim()[0] === '{') {
+    return JSON.parse(value)
+  } else {
+    return commonmark.parse(value).form
+  }
 }
