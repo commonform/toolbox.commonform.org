@@ -4,10 +4,11 @@
     "esbuild": "^0.28.2"
   },
   "dependencies": {
+    "buffer": "^6.0.3",
     "commonform-analyze": "^6.0.1",
     "commonform-commonmark": "^11.0.0"
   },
   "scripts": {
-    "build": "esbuild index.js --bundle --minify --sourcemap --target=chrome58 --outfile=site/bundle.js"
+    "build": "esbuild index.js --bundle --minify --sourcemap --target=chrome58 --inject:inject.js --outfile=site/bundle.js"
   }
 }
