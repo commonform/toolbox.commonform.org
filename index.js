@@ -105,7 +105,7 @@ function element (name, text) {
 
 function parse (value) {
   if (value.trim()[0] === '{') {
-    return JSON.parse(value)
+    return JSON.parse(value, null, 2)
   } else {
     return commonmark.parse(value).form
   }
