@@ -1,10 +1,10 @@
 import { parse } from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
-}, { once: true })
+})
 
 function configureTerms () {
   const terms = document.getElementById('terms')
