@@ -8,6 +8,6 @@
     "commonform-commonmark": "^11.0.0"
   },
   "scripts": {
-    "build": "esbuild index.js --bundle --minify --sourcemap --target=chrome58,firefox57,safari11,edge16 --outfile=site/bundle.js"
+    "build": "esbuild index.js --bundle --minify --sourcemap --target=chrome58 --outfile=site/bundle.js"
   }
 }
