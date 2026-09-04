@@ -20,6 +20,7 @@ function configureTerms () {
     }
 
     const analysis = analyze(parsed.form)
+    console.log(analysis)
     const fragment = document.createDocumentFragment()
 
     fragment.append(element('h3', 'Defined'))
