@@ -1,4 +1,5 @@
 #!/bin/sh
 set -e
 SITE=toolbox.commonform.org
+npm run build
 rsync --checksum --recursive --delete ./site/ "$SITE:/var/www/$SITE/"
