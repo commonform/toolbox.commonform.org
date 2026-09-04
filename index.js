@@ -4,6 +4,7 @@ import analyze from 'commonform-analyze'
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
+  configureParse()
 })
 
 function configureTerms () {
@@ -73,6 +74,26 @@ function configureHeadings () {
 
     output.replaceChildren()
     output.appendChild(fragment)
+  })
+}
+
+function configureParse () {
+  const terms = document.getElementById('parse')
+  const input = terms.querySelector('textarea')
+  const output = terms.querySelector('output')
+  input.addEventListener('input', event => {
+    let parsed
+    try {
+      parsed = parse(input.value)
+    } catch (error) {
+      output.innerText = error.message
+      return
+    }
+
+    output.replaceChildren()
+    const pre = document.createElement('pre')
+    pre.textContent = JSON.stringify(parsed)
+    output.appendChild(pre)
   })
 }
 
