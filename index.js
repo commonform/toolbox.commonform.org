@@ -1,9 +1,11 @@
 import commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
+import lint from 'commonform-lint'
 
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
+  configureLint()
   configureParse()
 })
 
@@ -70,6 +72,37 @@ function configureHeadings () {
     fragment.appendChild(referenced)
     for (const heading of Object.keys(analysis.references).sort()) {
       referenced.appendChild(element('li', heading))
+    }
+
+    output.replaceChildren()
+    output.appendChild(fragment)
+  })
+}
+
+function configureLint () {
+  const terms = document.getElementById('lint')
+  const input = terms.querySelector('textarea')
+  const output = terms.querySelector('output')
+  input.addEventListener('input', event => {
+    let parsed
+    try {
+      parsed = parse(input.value)
+    } catch (error) {
+      output.innerText = error.message
+      return
+    }
+
+    const items = lint(parsed.form)
+    const fragment = document.createDocumentFragment()
+
+    const table = document.createElement('table')
+    fragment.appendChild(table)
+    for (const { message, level, path, url } of items) {
+      const tr = document.createElement('tr')
+      table.appendChild(tr)
+      tr.appendChild(element('td', level))
+      tr.appendChild(element('td', message))
+      tr.appendChild(element('td', JSON.stringify(path)))
     }
 
     output.replaceChildren()
