@@ -92,7 +92,7 @@ function configureParse () {
 
     output.replaceChildren()
     const pre = document.createElement('pre')
-    pre.textContent = JSON.stringify(parsed)
+    pre.textContent = JSON.stringify(parsed, null, 2)
     output.appendChild(pre)
   })
 }
@@ -105,7 +105,7 @@ function element (name, text) {
 
 function parse (value) {
   if (value.trim()[0] === '{') {
-    return JSON.parse(value, null, 2)
+    return JSON.parse(value)
   } else {
     return commonmark.parse(value).form
   }
