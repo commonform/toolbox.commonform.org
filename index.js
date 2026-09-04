@@ -19,6 +19,7 @@ function configureTerms () {
       return
     }
 
+    console.log(parsed)
     const analysis = analyze(parsed.form)
     console.log(analysis)
     const fragment = document.createDocumentFragment()
