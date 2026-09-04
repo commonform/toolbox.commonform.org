@@ -103,8 +103,7 @@ function element (name, text) {
   return e
 }
 
-function parse (element) {
-  const value = element.value
+function parse (value) {
   if (value.trim()[0] === '{') {
     return JSON.parse(value)
   } else {
