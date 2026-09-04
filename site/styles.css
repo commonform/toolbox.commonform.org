@@ -6,8 +6,9 @@ html {
   text-rendering: optimizeLegibility;
 }
 
+header,
 main {
-  margin: 3rem auto;
+  margin: 1rem auto;
   max-width: 40rem;
   text-align: left;
 }
