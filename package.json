@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "dependencies": {
+    "commonform-analyze": "^6.0.1",
+    "commonform-commonmark": "^11.0.0"
+  },
+  "scripts": {
+    "build": "esbuild index.js --bundle --outfile=site/bundle.js"
+  }
+}

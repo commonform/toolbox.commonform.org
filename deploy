@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+SITE=toolbox.commonform.org
+rsync --checksum --recursive --delete ./site/ "$SITE:/var/www/$SITE/"
