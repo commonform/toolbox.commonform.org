@@ -19,19 +19,19 @@ function configureTerms () {
       return
     }
 
-    console.log(parsed)
     const analysis = analyze(parsed.form)
-    console.log(analysis)
     const fragment = document.createDocumentFragment()
 
     fragment.appendChild(element('h3', 'Defined'))
     const defined = document.createElement('ul')
+    fragment.appendChild(defined)
     for (const term of Object.keys(analysis.definitions)) {
       defined.appendChild(element('li', term))
     }
 
     fragment.appendChild(element('h3', 'Used'))
     const used = document.createElement('ul')
+    fragment.appendChild(used)
     for (const term of Object.keys(analysis.uses)) {
       used.appendChild(element('li', term))
     }
@@ -59,12 +59,14 @@ function configureHeadings () {
 
     fragment.appendChild(element('h3', 'Headings'))
     const headings = document.createElement('ul')
+    fragment.appendChild(headings)
     for (const heading of Object.keys(analysis.headings)) {
       headings.appendChild(element('li', heading))
     }
 
     fragment.appendChild(element('h3', 'References'))
     const referenced = document.createElement('ul')
+    fragment.appendChild(referenced)
     for (const heading of Object.keys(analysis.references)) {
       referenced.appendChild(element('li', heading))
     }
