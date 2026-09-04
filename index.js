@@ -1,11 +1,12 @@
 import commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 import lint from 'commonform-lint'
+import critique from 'commonform-critique'
 
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
-  configureLint()
+  configureCritique()
   configureParse()
 })
 
@@ -79,7 +80,40 @@ function configureHeadings () {
   })
 }
 
-function configureLint () {
+function configureCritique () {
+  const terms = document.getElementById('critique')
+  const input = terms.querySelector('textarea')
+  const output = terms.querySelector('output')
+  input.addEventListener('input', event => {
+    let parsed
+    try {
+      parsed = parse(input.value)
+    } catch (error) {
+      output.innerText = error.message
+      return
+    }
+
+    const items = critique(parsed.form)
+    console.log(items)
+    const fragment = document.createDocumentFragment()
+
+    const table = document.createElement('table')
+    fragment.appendChild(table)
+
+    for (const { message, level, path } of items) {
+      const tr = document.createElement('tr')
+      table.appendChild(tr)
+      tr.appendChild(element('td', level))
+      tr.appendChild(element('td', message))
+      tr.appendChild(element('td', JSON.stringify(path)))
+    }
+
+    output.replaceChildren()
+    output.appendChild(fragment)
+  })
+}
+
+function configureLint() {
   const terms = document.getElementById('lint')
   const input = terms.querySelector('textarea')
   const output = terms.querySelector('output')
@@ -93,7 +127,6 @@ function configureLint () {
     }
 
     const items = lint(parsed.form)
-    console.log(items)
     const fragment = document.createDocumentFragment()
 
     const table = document.createElement('table')
