@@ -93,11 +93,13 @@ function configureLint () {
     }
 
     const items = lint(parsed.form)
+    console.log(items)
     const fragment = document.createDocumentFragment()
 
     const table = document.createElement('table')
     fragment.appendChild(table)
-    for (const { message, level, path, url } of items) {
+
+    for (const { message, level, path } of items) {
       const tr = document.createElement('tr')
       table.appendChild(tr)
       tr.appendChild(element('td', level))
