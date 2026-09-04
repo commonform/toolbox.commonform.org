@@ -6,6 +6,7 @@ import critique from 'commonform-critique'
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
+  configureLint()
   configureCritique()
   configureParse()
 })
@@ -105,7 +106,7 @@ function configureCritique () {
       table.appendChild(tr)
       tr.appendChild(element('td', level))
       tr.appendChild(element('td', message))
-      tr.appendChild(element('td', JSON.stringify(path)))
+      tr.appendChild(element('td', path.join(':')))
     }
 
     output.replaceChildren()
@@ -113,7 +114,7 @@ function configureCritique () {
   })
 }
 
-function configureLint() {
+function configureLint () {
   const terms = document.getElementById('lint')
   const input = terms.querySelector('textarea')
   const output = terms.querySelector('output')
@@ -137,7 +138,7 @@ function configureLint() {
       table.appendChild(tr)
       tr.appendChild(element('td', level))
       tr.appendChild(element('td', message))
-      tr.appendChild(element('td', JSON.stringify(path)))
+      tr.appendChild(element('td', path.join(':')))
     }
 
     output.replaceChildren()
