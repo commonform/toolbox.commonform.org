@@ -94,23 +94,9 @@ function configureCritique () {
       return
     }
 
-    const items = critique(parsed.form)
-    console.log(items)
-    const fragment = document.createDocumentFragment()
-
-    const table = document.createElement('table')
-    fragment.appendChild(table)
-
-    for (const { message, level, path } of items) {
-      const tr = document.createElement('tr')
-      table.appendChild(tr)
-      tr.appendChild(element('td', level))
-      tr.appendChild(element('td', message))
-      tr.appendChild(element('td', path.join(':')))
-    }
-
+    const annotations = critique(parsed.form)
     output.replaceChildren()
-    output.appendChild(fragment)
+    output.appendChild(annotationsTable(annotations))
   })
 }
 
@@ -127,22 +113,9 @@ function configureLint () {
       return
     }
 
-    const items = lint(parsed.form)
-    const fragment = document.createDocumentFragment()
-
-    const table = document.createElement('table')
-    fragment.appendChild(table)
-
-    for (const { message, level, path } of items) {
-      const tr = document.createElement('tr')
-      table.appendChild(tr)
-      tr.appendChild(element('td', level))
-      tr.appendChild(element('td', message))
-      tr.appendChild(element('td', path.join(':')))
-    }
-
+    const annotations = lint(parsed.form)
     output.replaceChildren()
-    output.appendChild(fragment)
+    output.appendChild(annotationsTable(annotations))
   })
 }
 
@@ -170,6 +143,23 @@ function element (name, text) {
   const e = document.createElement(name)
   e.textContent = text
   return e
+}
+
+function annotationsTable (annotations) {
+  const table = document.createElement('table')
+  const thead = document.createElement('thead')
+  thead.innerHTML = '<tr><th>Level</th><th>Message</th><th>Location</th></tr>'
+  table.appendChild(thead)
+  const tbody = document.createElement('tbody')
+  table.appendChild(tbody)
+  for (const { message, level, path } of annotations) {
+    const tr = document.createElement('tr')
+    tbody.appendChild(tr)
+    tr.appendChild(element('td', level))
+    tr.appendChild(element('td', message))
+    tr.appendChild(element('td', path.join(':')))
+  }
+  return table
 }
 
 function parse (value) {
