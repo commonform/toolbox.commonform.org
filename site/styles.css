@@ -26,3 +26,9 @@ section {
 textarea {
   width: 100%;
 }
+
+.annotations {
+  td, th {
+    padding: 1ex;
+  }
+}

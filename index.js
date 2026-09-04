@@ -147,6 +147,7 @@ function element (name, text) {
 
 function annotationsTable (annotations) {
   const table = document.createElement('table')
+  table.classNames = 'annotations'
   const thead = document.createElement('thead')
   thead.innerHTML = '<tr><th>Level</th><th>Message</th><th>Location</th></tr>'
   table.appendChild(thead)
