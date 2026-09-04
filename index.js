@@ -10,7 +10,7 @@ function configureTerms () {
   const terms = document.getElementById('terms')
   const input = terms.querySelector('textarea')
   const output = terms.querySelector('output')
-  input.addEventListener('change', event => {
+  input.addEventListener('input', event => {
     let parsed
     try {
       parsed = parse(input.value)
@@ -43,7 +43,7 @@ function configureHeadings () {
   const terms = document.getElementById('headings')
   const input = terms.querySelector('textarea')
   const output = terms.querySelector('output')
-  input.addEventListener('change', event => {
+  input.addEventListener('input', event => {
     let parsed
     try {
       parsed = parse(input.value)
