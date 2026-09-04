@@ -134,7 +134,7 @@ function configureParse () {
 
     output.replaceChildren()
     const pre = document.createElement('pre')
-    pre.textContent = JSON.stringify(parsed, null, 2)
+    pre.textContent = JSON.stringify(parsed.form, null, 2)
     output.appendChild(pre)
   })
 }
