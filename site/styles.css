@@ -1,0 +1,13 @@
+body {
+  max-width: 40 rem;
+}
+
+section {
+  width: 100%;
+  border: 1px solid black;
+  padding: 1rem;
+}
+
+textarea {
+  width: 100%;
+}
