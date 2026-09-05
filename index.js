@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   configureCritique()
   configureRename()
   configureParse()
+  configureCopyButtons()
 })
 
 function configureTerms () {
@@ -179,14 +180,6 @@ function configureParse () {
   const section = document.getElementById('parse')
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
-  section.querySelector('.copyOutput').addEventListener('click', event => {
-    navigator.clipboard.writeText(output.textContent)
-    const originalText = event.target.textContent
-    event.target.textContent = 'Copied!'
-    setTimeout(() => {
-      event.target.textContent = originalText
-    }, 3000)
-  })
   input.addEventListener('input', event => {
     let form
     try {
@@ -202,6 +195,27 @@ function configureParse () {
     output.appendChild(pre)
   })
 }
+
+function configureCopyButtons () {
+  for (const [buttonSelector, sourceSelector] of [
+    ['.copyTextArea', 'textarea'],
+    ['.copyOutput', 'output']
+  ]) {
+    for (const button of document.querySelectorAll(buttonSelector)) {
+      button.addEventListener('click', ({ target }) => {
+        const source = target.parentNode.querySelector(sourceSelector)
+        navigator.clipboard.writeText(source.textContent || source.value)
+        const originalText = target.textContent
+        target.textContent = 'Copied!'
+        setTimeout(() => {
+          target.textContent = originalText
+        }, 3000)
+      })
+    }
+  }
+}
+
+/* Helper Functions */
 
 function elementWithText (name, text) {
   const e = document.createElement(name)
