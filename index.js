@@ -30,17 +30,27 @@ function configureTerms () {
     const fragment = document.createDocumentFragment()
 
     fragment.appendChild(element('h3', 'Defined'))
-    const defined = document.createElement('ul')
-    fragment.appendChild(defined)
-    for (const term of Object.keys(analysis.definitions).sort()) {
-      defined.appendChild(element('li', term))
+    const definitions = Object.keys(analysis.definitions).sort()
+    if (definitions.length === 0) {
+      fragment.appendChild(element('p', 'No definitions found.'))
+    } else {
+      const definitionsList = document.createElement('ul')
+      fragment.appendChild(definitionsList)
+      for (const term of definitions) {
+        definitionsList.appendChild(element('li', term))
+      }
     }
 
     fragment.appendChild(element('h3', 'Used'))
-    const used = document.createElement('ul')
-    fragment.appendChild(used)
-    for (const term of Object.keys(analysis.uses).sort()) {
-      used.appendChild(element('li', term))
+    const uses = Object.keys(analysis.uses).sort()
+    if (uses.length === 0) {
+      fragment.appendChild(element('p', 'No uses found.'))
+    } else {
+      const usesList = document.createElement('ul')
+      fragment.appendChild(usesList)
+      for (const term of uses) {
+        usesList.appendChild(element('li', term))
+      }
     }
 
     output.replaceChildren()
@@ -65,17 +75,27 @@ function configureHeadings () {
     const fragment = document.createDocumentFragment()
 
     fragment.appendChild(element('h3', 'Headings'))
-    const headings = document.createElement('ul')
-    fragment.appendChild(headings)
-    for (const heading of Object.keys(analysis.headings).sort()) {
-      headings.appendChild(element('li', heading))
+    const headings = Object.keys(analysis.headings).sort()
+    if (headings.length === 0) {
+      fragment.appendChild(element('p', 'No headings found.'))
+    } else {
+      const headingsList = document.createElement('ul')
+      fragment.appendChild(headingsList)
+      for (const heading of headings) {
+        headingsList.appendChild(element('li', heading))
+      }
     }
 
     fragment.appendChild(element('h3', 'References'))
-    const referenced = document.createElement('ul')
-    fragment.appendChild(referenced)
-    for (const heading of Object.keys(analysis.references).sort()) {
-      referenced.appendChild(element('li', heading))
+    const references = Object.keys(analysis.references).sort()
+    if (references.length === 0) {
+      fragment.appendChild(element('p', 'No references found.'))
+    } else {
+      const referencesList = document.createElement('ul')
+      fragment.appendChild(referencesList)
+      for (const heading of references) {
+        referencesList.appendChild(element('li', heading))
+      }
     }
 
     output.replaceChildren()
@@ -189,6 +209,9 @@ function element (name, text) {
 }
 
 function annotationsTable (annotations) {
+  if (annotations.length === 0) {
+    return element('p', 'No Results')
+  }
   const table = document.createElement('table')
   table.classNames = 'annotations'
   const thead = document.createElement('thead')
