@@ -69,3 +69,13 @@ textarea {
 .info { color: darkblue; }
 .warn { color: orange; }
 .error { color: darkred; }
+
+output {
+  display: block;
+  background: #eee;
+  border: 1px solid #777;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
