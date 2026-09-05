@@ -36,6 +36,24 @@
       <textarea></textarea>
       <output></output>
     </section>
+    <section id=rename>
+      <h2>Rename</h2>
+      <p>Enter Common Markup and replace a term or heading within it.</p>
+      <form>
+        <textarea></textarea>
+        <select id=renameType>
+          <option value=term>Term</option>
+          <option value=heading>Heading</option>
+        </select>
+        <label for=renameFrom>From</label>
+        <input id=renameFrom type=text>
+        <label for=renameTo>To</label>
+        <input id=renameTo type=text>
+        <button type=reset>Reset</button>
+        <button type=submit>Replace</button>
+      </form>
+      <output></output>
+    </section>
     <section id=parse>
       <h2>Parse</h2>
       <p>Enter Common Form markup to see the form as JSON data.</p>

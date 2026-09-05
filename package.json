@@ -8,7 +8,8 @@
     "commonform-analyze": "^6.0.1",
     "commonform-commonmark": "^11.0.0",
     "commonform-critique": "^1.0.3",
-    "commonform-lint": "^5.0.0"
+    "commonform-lint": "^5.0.0",
+    "commonform-rename": "^1.0.1"
   },
   "scripts": {
     "build": "esbuild index.js --bundle --minify --sourcemap --target=chrome58 --inject:inject.js --outfile=site/bundle.js"

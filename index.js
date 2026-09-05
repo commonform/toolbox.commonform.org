@@ -2,19 +2,21 @@ import commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 import lint from 'commonform-lint'
 import critique from 'commonform-critique'
+import rename from 'commonform-rename'
 
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
   configureHeadings()
   configureLint()
   configureCritique()
+  configureRename()
   configureParse()
 })
 
 function configureTerms () {
-  const terms = document.getElementById('terms')
-  const input = terms.querySelector('textarea')
-  const output = terms.querySelector('output')
+  const section = document.getElementById('terms')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
   input.addEventListener('input', event => {
     let parsed
     try {
@@ -47,9 +49,9 @@ function configureTerms () {
 }
 
 function configureHeadings () {
-  const terms = document.getElementById('headings')
-  const input = terms.querySelector('textarea')
-  const output = terms.querySelector('output')
+  const section = document.getElementById('headings')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
   input.addEventListener('input', event => {
     let parsed
     try {
@@ -82,9 +84,9 @@ function configureHeadings () {
 }
 
 function configureCritique () {
-  const terms = document.getElementById('critique')
-  const input = terms.querySelector('textarea')
-  const output = terms.querySelector('output')
+  const section = document.getElementById('critique')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
   input.addEventListener('input', event => {
     let parsed
     try {
@@ -101,9 +103,9 @@ function configureCritique () {
 }
 
 function configureLint () {
-  const terms = document.getElementById('lint')
-  const input = terms.querySelector('textarea')
-  const output = terms.querySelector('output')
+  const section = document.getElementById('lint')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
   input.addEventListener('input', event => {
     let parsed
     try {
@@ -120,9 +122,9 @@ function configureLint () {
 }
 
 function configureParse () {
-  const terms = document.getElementById('parse')
-  const input = terms.querySelector('textarea')
-  const output = terms.querySelector('output')
+  const section = document.getElementById('parse')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
   input.addEventListener('input', event => {
     let parsed
     try {
@@ -136,6 +138,37 @@ function configureParse () {
     const pre = document.createElement('pre')
     pre.textContent = JSON.stringify(parsed.form, null, 2)
     output.appendChild(pre)
+  })
+}
+
+function configureRename () {
+  const section = document.getElementById('rename')
+  const textarea = section.querySelector('textarea')
+  const output = section.querySelector('output')
+  const select = section.getElementById('renameType')
+  const fromInput = section.getElementById('renameFrom')
+  const toInput = section.getElementById('renameTo')
+  section.querySelector('form').addEventListener('submit', event => {
+    event.preventDefault()
+    event.stopPropagation()
+
+    const from = fromInput.value
+    const to = toInput.value
+    if (!from || !to) return
+    let parsed
+    try {
+      parsed = parse(textarea.value)
+    } catch (error) {
+      output.innerText = error.message
+      return
+    }
+
+    const transformer = select.value === 'term'
+      ? rename.term
+      : rename.heading
+
+    transformer(from, to, parsed.form)
+    textarea.value = commonmark.stringify(parsed.form)
   })
 }
 
