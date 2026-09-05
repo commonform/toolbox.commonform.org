@@ -5,6 +5,7 @@ import analyze from 'commonform-analyze'
 import lint from 'commonform-lint'
 import critique from 'commonform-critique'
 import rename from 'commonform-rename'
+import diff from 'word-diff'
 
 document.addEventListener('DOMContentLoaded', (event) => {
   configureTerms()
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   configureLint()
   configureCritique()
   configureRename()
+  configureDiff()
   configureParse()
   configureCopyButtons()
 }, { once: true })
@@ -176,6 +178,26 @@ function configureRename () {
     fromInput.value = ''
     toInput.value = ''
   })
+}
+
+function configureDiff () {
+  const section = document.getElementById('diff')
+  const before = document.getElementById('diffBefore')
+  const after = document.getElementById('diffAfter')
+  const output = section.querySelector('output')
+  function handler (event) {
+    const beforeText = before.value
+    const afterText = after.value
+    const difference = diff(beforeText, afterText)
+    const diffText = difference.map(({ remove, text, add }) => {
+      if (remove) return `{--${remove}--}`
+      if (add) return `{++${remove}++}`
+      return text
+    }).join('')
+    output.textContent = diffText
+  }
+  before.addEventListener('input', handler)
+  after.addEventListener('input', handler)
 }
 
 function configureParse () {
