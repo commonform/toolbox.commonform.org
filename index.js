@@ -4,7 +4,7 @@ import commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 import lint from 'commonform-lint'
 import critique from 'commonform-critique'
-import rename from 'commonform-rename'
+import * as rename from 'commonform-rename'
 import diff from 'word-diff'
 
 document.addEventListener('DOMContentLoaded', (event) => {

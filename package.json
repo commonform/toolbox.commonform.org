@@ -10,7 +10,7 @@
     "commonform-commonmark": "^11.0.0",
     "commonform-critique": "^2.0.0",
     "commonform-lint": "^6.0.0",
-    "commonform-rename": "^1.0.1",
+    "commonform-rename": "^2.0.0",
     "word-diff": "^1.0.1"
   },
   "scripts": {
