@@ -18,15 +18,15 @@ function configureTerms () {
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
   input.addEventListener('input', event => {
-    let parsed
+    let form
     try {
-      parsed = parse(input.value)
+      form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
       return
     }
 
-    const analysis = analyze(parsed.form)
+    const analysis = analyze(form)
     const fragment = document.createDocumentFragment()
 
     fragment.appendChild(element('h3', 'Defined'))
@@ -53,15 +53,15 @@ function configureHeadings () {
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
   input.addEventListener('input', event => {
-    let parsed
+    let form
     try {
-      parsed = parse(input.value)
+      form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
       return
     }
 
-    const analysis = analyze(parsed.form)
+    const analysis = analyze(form)
     const fragment = document.createDocumentFragment()
 
     fragment.appendChild(element('h3', 'Headings'))
@@ -88,15 +88,15 @@ function configureCritique () {
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
   input.addEventListener('input', event => {
-    let parsed
+    let form
     try {
-      parsed = parse(input.value)
+      form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
       return
     }
 
-    const annotations = critique(parsed.form)
+    const annotations = critique(form)
     output.replaceChildren()
     output.appendChild(annotationsTable(annotations))
   })
@@ -107,15 +107,15 @@ function configureLint () {
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
   input.addEventListener('input', event => {
-    let parsed
+    let form
     try {
-      parsed = parse(input.value)
+      form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
       return
     }
 
-    const annotations = lint(parsed.form)
+    const annotations = lint(form)
     output.replaceChildren()
     output.appendChild(annotationsTable(annotations))
   })
@@ -125,10 +125,18 @@ function configureParse () {
   const section = document.getElementById('parse')
   const input = section.querySelector('textarea')
   const output = section.querySelector('output')
+  section.querySelector('.copyOutput').addEventListener('click', event => {
+    navigator.clipboard.writeText(output.textContent)
+    const originalText = event.target.textContent
+    event.target.textContent = 'Copied!'
+    setTimeout(() => {
+      event.target.textContent = originalText
+    }, 3000)
+  })
   input.addEventListener('input', event => {
-    let parsed
+    let form
     try {
-      parsed = parse(input.value)
+      form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
       return
@@ -136,7 +144,7 @@ function configureParse () {
 
     output.replaceChildren()
     const pre = document.createElement('pre')
-    pre.textContent = JSON.stringify(parsed.form, null, 2)
+    pre.textContent = JSON.stringify(form, null, 2)
     output.appendChild(pre)
   })
 }
@@ -155,9 +163,9 @@ function configureRename () {
     const from = fromInput.value
     const to = toInput.value
     if (!from || !to) return
-    let parsed
+    let form
     try {
-      parsed = parse(textarea.value)
+      form = parse(textarea.value)
     } catch (error) {
       output.innerText = error.message
       return
@@ -167,8 +175,8 @@ function configureRename () {
       ? rename.term
       : rename.heading
 
-    transformer(from, to, parsed.form)
-    textarea.value = commonmark.stringify(parsed.form)
+    transformer(from, to, form)
+    textarea.value = commonmark.stringify(form)
     fromInput.value = ''
     toInput.value = ''
   })
@@ -191,17 +199,23 @@ function annotationsTable (annotations) {
   for (const { message, level, path } of annotations) {
     const tr = document.createElement('tr')
     tbody.appendChild(tr)
-    tr.appendChild(element('td', level))
+    const levelCell = document.createElement('td')
+    const span = document.createElement('span')
+    levelCell.appendChild(span)
+    span.classList.add(level)
+    span.textContent = level
+    tr.appendChild(levelCell)
     tr.appendChild(element('td', message))
-    tr.appendChild(element('td', path.join(':')))
+    tr.appendChild(element('td', path.join(', ')))
   }
   return table
 }
 
 function parse (value) {
   if (value.trim()[0] === '{') {
+    console.error('parsing as JSON')
     return JSON.parse(value)
   } else {
-    return commonmark.parse(value)
+    return commonmark.parse(value).form
   }
 }
