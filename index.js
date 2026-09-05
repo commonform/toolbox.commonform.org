@@ -145,9 +145,9 @@ function configureRename () {
   const section = document.getElementById('rename')
   const textarea = section.querySelector('textarea')
   const output = section.querySelector('output')
-  const select = section.getElementById('renameType')
-  const fromInput = section.getElementById('renameFrom')
-  const toInput = section.getElementById('renameTo')
+  const select = document.getElementById('renameType')
+  const fromInput = document.getElementById('renameFrom')
+  const toInput = document.getElementById('renameTo')
   section.querySelector('form').addEventListener('submit', event => {
     event.preventDefault()
     event.stopPropagation()
@@ -169,6 +169,8 @@ function configureRename () {
 
     transformer(from, to, parsed.form)
     textarea.value = commonmark.stringify(parsed.form)
+    fromInput.value = ''
+    toInput.value = ''
   })
 }
 

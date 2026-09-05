@@ -32,3 +32,9 @@ textarea {
     padding: 1ex;
   }
 }
+
+textarea {
+  min-height: 3rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
