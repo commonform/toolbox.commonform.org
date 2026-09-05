@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   configureLint()
   configureCritique()
   configureRename()
-  configureDiff()
+  configureCompare()
   configureParse()
   configureCopyButtons()
 }, { once: true })
@@ -180,10 +180,10 @@ function configureRename () {
   })
 }
 
-function configureDiff () {
-  const section = document.getElementById('diff')
-  const before = document.getElementById('diffBefore')
-  const after = document.getElementById('diffAfter')
+function configureCompare () {
+  const section = document.getElementById('compare')
+  const before = document.getElementById('compareBefore')
+  const after = document.getElementById('compareAfter')
   const output = section.querySelector('output')
   function handler (event) {
     const beforeText = before.value
@@ -192,7 +192,7 @@ function configureDiff () {
     let diffText = ''
     for (const span of difference) {
       if (Object.hasOwn(span, 'remove')) diffText += `{--${span.remove}--}`
-      if (Object.hasOwn(span, 'add')) diffText += `{--${span.add}--}`
+      if (Object.hasOwn(span, 'add')) diffText += `{++${span.add}++}`
       if (Object.hasOwn(span, 'text')) diffText += span.text
     }
     output.textContent = diffText
