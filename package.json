@@ -9,7 +9,7 @@
     "commonform-analyze": "^7.0.1",
     "commonform-commonmark": "^11.0.0",
     "commonform-critique": "^2.0.0",
-    "commonform-lint": "^5.0.0",
+    "commonform-lint": "^6.0.0",
     "commonform-rename": "^1.0.1",
     "word-diff": "^1.0.1"
   },
