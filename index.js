@@ -190,10 +190,10 @@ function configureDiff () {
     const afterText = after.value
     const difference = diff.diffString(beforeText, afterText)
     let diffText = ''
-    for (const { add, remove, text } of difference) {
-      if (remove) diffText += `{--${remove}--}`
-      if (add) diffText += `{++${add}++}`
-      diffText += text
+    for (const span of difference) {
+      if (Object.hasOwn(span, 'remove')) diffText += `{--${span.remove}--}`
+      if (Object.hasOwn(span, 'add')) diffText += `{--${span.add}--}`
+      if (Object.hasOwn(span, 'text')) diffText += span.text
     }
     output.textContent = diffText
   }
