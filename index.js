@@ -141,34 +141,6 @@ function configureLint () {
   })
 }
 
-function configureParse () {
-  const section = document.getElementById('parse')
-  const input = section.querySelector('textarea')
-  const output = section.querySelector('output')
-  section.querySelector('.copyOutput').addEventListener('click', event => {
-    navigator.clipboard.writeText(output.textContent)
-    const originalText = event.target.textContent
-    event.target.textContent = 'Copied!'
-    setTimeout(() => {
-      event.target.textContent = originalText
-    }, 3000)
-  })
-  input.addEventListener('input', event => {
-    let form
-    try {
-      form = parse(input.value)
-    } catch (error) {
-      output.innerText = error.message
-      return
-    }
-
-    output.replaceChildren()
-    const pre = document.createElement('pre')
-    pre.textContent = JSON.stringify(form, null, 2)
-    output.appendChild(pre)
-  })
-}
-
 function configureRename () {
   const section = document.getElementById('rename')
   const textarea = section.querySelector('textarea')
@@ -199,6 +171,34 @@ function configureRename () {
     textarea.value = commonmark.stringify(form)
     fromInput.value = ''
     toInput.value = ''
+  })
+}
+
+function configureParse () {
+  const section = document.getElementById('parse')
+  const input = section.querySelector('textarea')
+  const output = section.querySelector('output')
+  section.querySelector('.copyOutput').addEventListener('click', event => {
+    navigator.clipboard.writeText(output.textContent)
+    const originalText = event.target.textContent
+    event.target.textContent = 'Copied!'
+    setTimeout(() => {
+      event.target.textContent = originalText
+    }, 3000)
+  })
+  input.addEventListener('input', event => {
+    let form
+    try {
+      form = parse(input.value)
+    } catch (error) {
+      output.innerText = error.message
+      return
+    }
+
+    output.replaceChildren()
+    const pre = document.createElement('pre')
+    pre.textContent = JSON.stringify(form, null, 2)
+    output.appendChild(pre)
   })
 }
 
