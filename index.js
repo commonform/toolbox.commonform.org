@@ -192,7 +192,7 @@ function configureDiff () {
     let diffText = ''
     for (const { add, remove, text } of difference) {
       if (remove) diffText += `{--${remove}--}`
-      if (add) diffText += `{++${remove}++}`
+      if (add) diffText += `{++${add}++}`
       diffText += text
     }
     output.textContent = diffText
