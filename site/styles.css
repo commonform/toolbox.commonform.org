@@ -69,8 +69,3 @@ textarea {
 .info { color: darkblue; }
 .warn { color: orange; }
 .error { color: darkred; }
-
-#diffBefore, #diffAfter {
-  width: 50%;
-  box-sizing: border-box;
-}

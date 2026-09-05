@@ -189,11 +189,12 @@ function configureDiff () {
     const beforeText = before.value
     const afterText = after.value
     const difference = diff.diffString(beforeText, afterText)
-    const diffText = difference.map(({ remove, text, add }) => {
-      if (remove) return `{--${remove}--}`
-      if (add) return `{++${remove}++}`
-      return text
-    }).join('')
+    let diffText = ''
+    for (const { add, remove, text } of difference) {
+      if (remove) diffText += `{--${remove}--}`
+      if (add) diffText += `{++${remove}++}`
+      diffText += text
+    }
     output.textContent = diffText
   }
   before.addEventListener('input', handler)
