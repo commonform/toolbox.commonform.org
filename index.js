@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   configureRename()
   configureParse()
   configureCopyButtons()
-})
+}, { once: true })
 
 function configureTerms () {
   const section = document.getElementById('terms')
