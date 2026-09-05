@@ -8,6 +8,7 @@ html {
 
 header,
 main {
+  background-color: white;
   margin: 1rem auto;
   max-width: 40rem;
   text-align: left;
@@ -37,6 +38,15 @@ textarea {
   min-height: 3rem;
   padding: 1rem;
   box-sizing: border-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .10s ease-in-out, box-shadow .10s ease-in-out;
+  outline: 0;
+  &:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 .25rem rgba(0, 123, 255, 0.25);
+    outline: 0;
+  }
 }
 
 .info { color: darkblue; }
