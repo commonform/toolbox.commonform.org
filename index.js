@@ -29,27 +29,27 @@ function configureTerms () {
     const analysis = analyze(form)
     const fragment = document.createDocumentFragment()
 
-    fragment.appendChild(element('h3', 'Defined'))
+    fragment.appendChild(elementWithText('h3', 'Defined'))
     const definitions = Object.keys(analysis.definitions).sort()
     if (definitions.length === 0) {
-      fragment.appendChild(element('p', 'No definitions found.'))
+      fragment.appendChild(elementWithText('p', 'No definitions found.'))
     } else {
       const definitionsList = document.createElement('ul')
       fragment.appendChild(definitionsList)
       for (const term of definitions) {
-        definitionsList.appendChild(element('li', term))
+        definitionsList.appendChild(elementWithText('li', term))
       }
     }
 
-    fragment.appendChild(element('h3', 'Used'))
+    fragment.appendChild(elementWithText('h3', 'Used'))
     const uses = Object.keys(analysis.uses).sort()
     if (uses.length === 0) {
-      fragment.appendChild(element('p', 'No uses found.'))
+      fragment.appendChild(elementWithText('p', 'No uses found.'))
     } else {
       const usesList = document.createElement('ul')
       fragment.appendChild(usesList)
       for (const term of uses) {
-        usesList.appendChild(element('li', term))
+        usesList.appendChild(elementWithText('li', term))
       }
     }
 
@@ -74,27 +74,27 @@ function configureHeadings () {
     const analysis = analyze(form)
     const fragment = document.createDocumentFragment()
 
-    fragment.appendChild(element('h3', 'Headings'))
+    fragment.appendChild(elementWithText('h3', 'Headings'))
     const headings = Object.keys(analysis.headings).sort()
     if (headings.length === 0) {
-      fragment.appendChild(element('p', 'No headings found.'))
+      fragment.appendChild(elementWithText('p', 'No headings found.'))
     } else {
       const headingsList = document.createElement('ul')
       fragment.appendChild(headingsList)
       for (const heading of headings) {
-        headingsList.appendChild(element('li', heading))
+        headingsList.appendChild(elementWithText('li', heading))
       }
     }
 
-    fragment.appendChild(element('h3', 'References'))
+    fragment.appendChild(elementWithText('h3', 'References'))
     const references = Object.keys(analysis.references).sort()
     if (references.length === 0) {
-      fragment.appendChild(element('p', 'No references found.'))
+      fragment.appendChild(elementWithText('p', 'No references found.'))
     } else {
       const referencesList = document.createElement('ul')
       fragment.appendChild(referencesList)
       for (const heading of references) {
-        referencesList.appendChild(element('li', heading))
+        referencesList.appendChild(elementWithText('li', heading))
       }
     }
 
@@ -203,7 +203,7 @@ function configureParse () {
   })
 }
 
-function element (name, text) {
+function elementWithText (name, text) {
   const e = document.createElement(name)
   e.textContent = text
   return e
@@ -211,7 +211,7 @@ function element (name, text) {
 
 function annotationsTable (annotations) {
   if (annotations.length === 0) {
-    return element('p', 'No Results')
+    return elementWithText('p', 'No Results')
   }
   const table = document.createElement('table')
   table.classNames = 'annotations'
@@ -229,8 +229,8 @@ function annotationsTable (annotations) {
     span.classList.add(level)
     span.textContent = level
     tr.appendChild(levelCell)
-    tr.appendChild(element('td', message))
-    tr.appendChild(element('td', path.join(', ')))
+    tr.appendChild(elementWithText('td', message))
+    tr.appendChild(elementWithText('td', path.join(', ')))
   }
   return table
 }
