@@ -155,6 +155,7 @@ function configureRename () {
     const from = fromInput.value
     const to = toInput.value
     if (!from || !to) return
+
     let form
     try {
       form = parse(textarea.value)
@@ -166,8 +167,8 @@ function configureRename () {
     const transformer = select.value === 'term'
       ? rename.term
       : rename.heading
-
     transformer(from, to, form)
+
     textarea.value = commonmark.stringify(form)
     fromInput.value = ''
     toInput.value = ''
