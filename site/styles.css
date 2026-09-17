@@ -82,3 +82,11 @@ output {
 .hidden {
   display: none;
 }
+
+select, input {
+  padding: 1ex;
+}
+
+button {
+  padding: 1ex;
+}
