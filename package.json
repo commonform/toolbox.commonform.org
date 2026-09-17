@@ -1,4 +1,5 @@
 {
+  "name": "toolbox.commonform.org",
   "private": true,
   "type": "module",
   "devDependencies": {
