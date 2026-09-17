@@ -54,7 +54,7 @@ textarea {
 
 /* Forms */
 
-textarea, select, input {
+button, textarea, select, input {
   font-size: 100%;
 }
 
