@@ -11,6 +11,8 @@ html {
   html { font-size: 14px; }
 }
 
+/* Main Content Blocks */
+
 html {
   background-color: #fefefe;
   font-family: sans-serif;
@@ -34,17 +36,6 @@ section {
   margin: 1rem 0;
   h2 {
     margin-top: 0;
-  }
-}
-
-textarea {
-  width: 100%;
-  resize: vertical;
-}
-
-.annotations {
-  td, th {
-    padding: 1ex;
   }
 }
 
@@ -72,6 +63,8 @@ button, textarea, select, input {
 }
 
 textarea {
+  width: 100%;
+  resize: vertical;
   min-height: 3rem;
   padding: 1rem;
   box-sizing: border-box;
@@ -95,6 +88,12 @@ button {
 }
 
 /* Output */
+
+.annotations {
+  td, th {
+    padding: 1ex;
+  }
+}
 
 output {
   display: block;
