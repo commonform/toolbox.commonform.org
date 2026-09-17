@@ -28,6 +28,7 @@ function configureTerms () {
       form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.remove('hidden')
       return
     }
 
@@ -60,6 +61,7 @@ function configureTerms () {
 
     output.replaceChildren()
     output.appendChild(fragment)
+    output.classList.remove('hidden')
   })
 }
 
@@ -73,6 +75,7 @@ function configureHeadings () {
       form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.remove('hidden')
       return
     }
 
@@ -105,6 +108,7 @@ function configureHeadings () {
 
     output.replaceChildren()
     output.appendChild(fragment)
+    output.classList.remove('hidden')
   })
 }
 
@@ -118,12 +122,14 @@ function configureCritique () {
       form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.remove('hidden')
       return
     }
 
     const annotations = critique(form)
     output.replaceChildren()
     output.appendChild(annotationsTable(annotations))
+    output.classList.remove('hidden')
   })
 }
 
@@ -137,12 +143,14 @@ function configureLint () {
       form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.remove('hidden')
       return
     }
 
     const annotations = lint(form)
     output.replaceChildren()
     output.appendChild(annotationsTable(annotations))
+    output.classList.remove('hidden')
   })
 }
 
@@ -166,8 +174,10 @@ function configureRename () {
       form = parse(textarea.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.remove('hidden')
       return
     }
+    output.classList.add('hidden')
 
     const transformer = select.value === 'term'
       ? rename.term
@@ -196,6 +206,7 @@ function configureCompare () {
       if (Object.hasOwn(span, 'text')) diffText += span.text
     }
     output.textContent = diffText
+    output.classList.add('hidden')
   }
   before.addEventListener('input', handler)
   after.addEventListener('input', handler)
@@ -211,6 +222,7 @@ function configureParse () {
       form = parse(input.value)
     } catch (error) {
       output.innerText = error.message
+      output.classList.add('hidden')
       return
     }
 
@@ -218,6 +230,7 @@ function configureParse () {
     const pre = document.createElement('pre')
     pre.textContent = JSON.stringify(form, null, 2)
     output.appendChild(pre)
+    output.classList.add('hidden')
   })
 }
 
