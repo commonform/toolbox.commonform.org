@@ -87,6 +87,10 @@ button {
   padding: 1ex;
 }
 
+.copyOutput:before {
+  content: '📋 ';
+}
+
 /* Output */
 
 .annotations {
