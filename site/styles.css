@@ -32,6 +32,11 @@ footer {
   text-align: left;
 }
 
+footer {
+  text-align: right;
+  font-size: 85%;
+}
+
 section {
   width: 100%;
   border: 1px solid black;
