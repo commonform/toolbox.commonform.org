@@ -1,3 +1,5 @@
+/* Base Typography */
+
 html {
   font-size: 2.0vw;
   text-align: left;
@@ -48,7 +50,9 @@ a[href] {
   }
 }
 
-/* Asides */
+/* Utility Classes */
+
+.hidden { display: none; }
 
 .info { color: darkblue; }
 .warn { color: orange; }
@@ -79,11 +83,7 @@ textarea {
   }
 }
 
-select, input {
-  padding: 1ex;
-}
-
-button {
+button, select, input {
   padding: 1ex;
 }
 
@@ -109,8 +109,4 @@ output {
   margin-top: 1rem;
   min-height: 1rem;
   width: 100%;
-}
-
-.hidden {
-  display: none;
 }
