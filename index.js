@@ -155,6 +155,7 @@ function configureLint () {
 }
 
 function configureRename () {
+  // TODO: Rename: List terms and headings in <select>.
   const section = document.getElementById('rename')
   const textarea = section.querySelector('textarea')
   const output = section.querySelector('output')
