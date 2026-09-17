@@ -1,5 +1,8 @@
 #!/bin/sh
 set -e
 SITE=toolbox.commonform.org
+if ! test -d node_modules; then
+  npm ci
+fi
 npm run build
 rsync --checksum --recursive --delete ./site/ "$SITE:/var/www/$SITE/"
