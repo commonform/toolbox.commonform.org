@@ -1,5 +1,7 @@
 // The main module for the client-side script served to users.
 // See the `build` script in `package.json`.
+//
+// Standard Style <https://standardjs.com/>
 import * as commonmark from 'commonform-commonmark'
 import analyze from 'commonform-analyze'
 import lint from 'commonform-lint'
