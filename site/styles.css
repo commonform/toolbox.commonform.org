@@ -76,6 +76,7 @@ button, textarea, select, input {
 textarea {
   width: 100%;
   resize: vertical;
+  min-height: 3rem;
   height: 6rem;
   padding: 1rem;
   box-sizing: border-box;
